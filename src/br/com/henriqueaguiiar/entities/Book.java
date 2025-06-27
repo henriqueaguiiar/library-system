@@ -18,6 +18,7 @@ public class Book {
         this.autor = autor;
         this.available = true;
         this.registerDate = LocalDate.now();
+        this.updatedDate = LocalDate.now();
     }
 
     public String getId() {
