@@ -3,6 +3,7 @@ package br.com.henriqueaguiiar.application;
 import br.com.henriqueaguiiar.entities.Autor;
 import br.com.henriqueaguiiar.entities.Book;
 import br.com.henriqueaguiiar.entities.Library;
+import br.com.henriqueaguiiar.utils.AutorException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,10 +69,21 @@ public class Main {
                     else{
                         System.out.println("Author not found. Please register the author first (Option 1).");
                     }
-                    break;
                     }
+                    break;
+                case 3:
+                    try{
+                        if(library.getAutorsList().isEmpty()){
+                            throw new AutorException("The autor list is empty. Please register the author first (Option 1)");
+                        }
+                        for(Autor autor : library.getAutorsList()){
+                            System.out.println(autor);
+                        }
+                    }catch(AutorException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
             }
-
         }while(opcao != 0);
 
 
