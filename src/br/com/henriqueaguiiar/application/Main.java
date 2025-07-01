@@ -63,13 +63,13 @@ public class Main {
                             authorFound = autor;
                             break;
                         }
+                    }
                     if(authorFound != null){
                         Book book = new Book(nameTitle, authorFound);
                         library.addBookToList(book);
                     }
                     else{
                         System.out.println("Author not found. Please register the author first (Option 1).");
-                    }
                     }
                     break;
                 case 3:

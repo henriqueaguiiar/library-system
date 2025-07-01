@@ -14,7 +14,6 @@ public class Library {
 
     public Library() {
         this.bookList = new ArrayList<>();
-        ;
         this.autorsList = new ArrayList<>();
         this.loanList = new ArrayList<>();
     }
