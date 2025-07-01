@@ -98,22 +98,7 @@ public class Main {
                     break;
             }
         }while(opcao != 0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        System.out.println("Logging out Thank you until next time!");
 
     input.close();
     }
