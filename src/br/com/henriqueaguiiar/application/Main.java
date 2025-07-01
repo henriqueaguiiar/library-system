@@ -4,6 +4,7 @@ import br.com.henriqueaguiiar.entities.Autor;
 import br.com.henriqueaguiiar.entities.Book;
 import br.com.henriqueaguiiar.entities.Library;
 import br.com.henriqueaguiiar.utils.AutorException;
+import br.com.henriqueaguiiar.utils.BookException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,6 +81,18 @@ public class Main {
                             System.out.println(autor);
                         }
                     }catch(AutorException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
+                case 4:
+                    try{
+                        if(library.getBookList().isEmpty()){
+                            throw new BookException("The book list is empty. Please register the author first (Option 2)");
+                        }
+                        for(Book book : library.getBookList()){
+                            System.out.println(book);
+                        }
+                    }catch(BookException erro){
                         System.out.println(erro.getMessage());
                     }
                     break;
