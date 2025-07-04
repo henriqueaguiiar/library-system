@@ -1,7 +1,7 @@
-package br.com.henriqueaguiiar.entities;
-import br.com.henriqueaguiiar.utils.AutorException;
-import br.com.henriqueaguiiar.utils.BookException;
-import br.com.henriqueaguiiar.utils.LoanException;
+package br.com.henriqueaguiiar.model.entities;
+import br.com.henriqueaguiiar.model.Exceptions.AutorException;
+import br.com.henriqueaguiiar.model.Exceptions.BookException;
+import br.com.henriqueaguiiar.model.Exceptions.LoanException;
 
 
 import java.util.ArrayList;
@@ -92,6 +92,7 @@ public class Library {
                 loanList.add(loan);
                 book.setAvailable(false);
                 loan.setLoanStatus(true);
+                return;
             }
             throw new LoanException("The book is not available for loan");
         }

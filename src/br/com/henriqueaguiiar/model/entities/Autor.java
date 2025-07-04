@@ -1,4 +1,4 @@
-package br.com.henriqueaguiiar.entities;
+package br.com.henriqueaguiiar.model.entities;
 
 import java.util.Date;
 import java.util.UUID;

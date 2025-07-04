@@ -1,4 +1,4 @@
-package br.com.henriqueaguiiar.utils;
+package br.com.henriqueaguiiar.model.Exceptions;
 
 public class BookException extends RuntimeException {
     private static final long serialVersionUID = 1L;
