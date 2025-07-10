@@ -122,6 +122,28 @@ public class Main {
                         System.out.println(erro.getMessage());
                     }
                     break;
+                case 6:
+                    try{
+                        System.out.print("Enter the book name: ");
+                        String bookName = input.nextLine().trim().toLowerCase();
+                        boolean found = false;
+                        for(Book book : library.getBookList()){
+                            if(book.getTitleName().equalsIgnoreCase(bookName)){
+                                String idBook = book.getId().trim().toLowerCase();
+                                System.out.print("Enter the new title Name: ");
+                                String titleName = input.nextLine();
+                                library.updateBook(idBook, titleName);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if(!found){
+                            throw  new BookException("Book with the given ID does not exist.");
+                        }
+                    }catch (BookException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
             }
         }while(opcao != 0);
         System.out.println("Logging out Thank you until next time!");
