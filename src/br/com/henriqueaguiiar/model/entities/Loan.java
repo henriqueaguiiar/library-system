@@ -1,6 +1,4 @@
-package br.com.henriqueaguiiar.entities;
-
-import br.com.henriqueaguiiar.utils.LoanException;
+package br.com.henriqueaguiiar.model.entities;
 
 import java.time.LocalDate;
 import java.util.UUID;

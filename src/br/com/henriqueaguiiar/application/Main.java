@@ -1,10 +1,11 @@
 package br.com.henriqueaguiiar.application;
 
-import br.com.henriqueaguiiar.entities.Autor;
-import br.com.henriqueaguiiar.entities.Book;
-import br.com.henriqueaguiiar.entities.Library;
-import br.com.henriqueaguiiar.utils.AutorException;
-import br.com.henriqueaguiiar.utils.BookException;
+import br.com.henriqueaguiiar.model.Exceptions.LoanException;
+import br.com.henriqueaguiiar.model.entities.Autor;
+import br.com.henriqueaguiiar.model.entities.Book;
+import br.com.henriqueaguiiar.model.entities.Library;
+import br.com.henriqueaguiiar.model.Exceptions.AutorException;
+import br.com.henriqueaguiiar.model.Exceptions.BookException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,7 +50,7 @@ public class Main {
                         Autor autor = new Autor(name, bornDate);
                         library.addAutorToLIst(autor);
                     }catch(ParseException erro){
-                        System.out.println("Formato de data inválido. Use dd/MM/yyyy.");
+                        System.out.println("Invalid date format. Use dd/MM/yyyy.");
                     }
                     break;
                 case 2:
@@ -87,7 +88,7 @@ public class Main {
                 case 4:
                     try{
                         if(library.getBookList().isEmpty()){
-                            throw new BookException("The book list is empty. Please register the author first (Option 2)");
+                            throw new BookException("The book list is empty. Please register the book first (Option 2)");
                         }
                         for(Book book : library.getBookList()){
                             System.out.println(book);
@@ -96,24 +97,56 @@ public class Main {
                         System.out.println(erro.getMessage());
                     }
                     break;
+                case 5:
+                    try{
+                        if(library.getBookList().isEmpty()){
+                            throw new BookException("The book list is empty. Please register the book first (Option 2)");
+                        }
+                        System.out.print("Enter the name book: ");
+                        String nameBOok = input.nextLine();
+                        System.out.print("Enter the username: ");
+                        String username = input.nextLine();
+                        boolean flagValidate = false;
+                        for(Book book : library.getBookList()){
+                            if(book.getTitleName().equalsIgnoreCase(nameBOok)){
+                                library.loanValidate(book, username);
+                                System.out.println("Loan completed successfully!");
+                                flagValidate = true;
+                                break;
+                            }
+                        }
+                        if(!flagValidate){
+                                System.out.println("Book not found, check if the book is registered in option 4.");
+                        }
+                    }catch (BookException | LoanException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
+                case 6:
+                    try{
+                        System.out.print("Enter the book name: ");
+                        String bookName = input.nextLine().trim().toLowerCase();
+                        boolean found = false;
+                        for(Book book : library.getBookList()){
+                            if(book.getTitleName().equalsIgnoreCase(bookName)){
+                                String idBook = book.getId().trim().toLowerCase();
+                                System.out.print("Enter the new title Name: ");
+                                String titleName = input.nextLine();
+                                library.updateBook(idBook, titleName);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if(!found){
+                            throw  new BookException("Book with the given ID does not exist.");
+                        }
+                    }catch (BookException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
             }
         }while(opcao != 0);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        System.out.println("Logging out Thank you until next time!");
 
     input.close();
     }

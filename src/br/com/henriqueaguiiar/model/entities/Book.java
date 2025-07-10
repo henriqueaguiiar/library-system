@@ -1,4 +1,4 @@
-package br.com.henriqueaguiiar.entities;
+package br.com.henriqueaguiiar.model.entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
