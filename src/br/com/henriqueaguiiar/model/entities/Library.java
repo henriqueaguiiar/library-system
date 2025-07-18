@@ -6,6 +6,7 @@ import br.com.henriqueaguiiar.model.Exceptions.LoanException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Library {
@@ -70,13 +71,24 @@ public class Library {
     }
 
     public void removeBookList(String id) {
-        for (Book book : bookList) {
-            if (book.getId() == id) {
-                bookList.remove(book);
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookList.get(i).getId().equalsIgnoreCase(id)) {
+                bookList.remove(i); //
+                return;
             }
-
         }
         throw new BookException("The requested book does not exist or the id is invalid");
+    }
+
+    public void updateAutor(String id, String newNameAutor, Date newBornDate) {
+        for(Autor autor : autorsList){
+            if(autor.getId().equalsIgnoreCase(id)){
+                autor.setName(newNameAutor);
+                autor.setBornDate(newBornDate);
+                return;
+            }
+        }
+        throw new BookException("The requested autor does not exist or the id is invalid");
     }
 
     public void updateBook(String id, String newTitle) {

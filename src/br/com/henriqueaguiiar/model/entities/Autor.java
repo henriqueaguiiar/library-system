@@ -1,5 +1,6 @@
 package br.com.henriqueaguiiar.model.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -37,8 +38,10 @@ public class Autor {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateFormatted = sdf.format(this.bornDate); // <-- CORRETO
         return "\nId: " + this.id
                 + "\nAutor Name: " + this.name
-                + "\nBorn Date: " + this.bornDate;
+                + "\nBorn Date: " + dateFormatted;
     }
 }

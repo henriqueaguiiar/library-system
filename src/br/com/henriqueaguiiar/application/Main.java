@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Library library = new Library();
         int opcao;
 
@@ -40,7 +41,6 @@ public class Main {
 
             switch (opcao){
                 case 1:
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     try{
                         System.out.print("\nEnter the author's name: ");
                         String name = input.nextLine();
@@ -139,6 +139,56 @@ public class Main {
                         }
                         if(!found){
                             throw  new BookException("Book with the given ID does not exist.");
+                        }
+                    }catch (BookException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
+                case 7:
+                    try{
+                        System.out.print("Enter the autor name: ");
+                        String autorName = input.nextLine().trim().toLowerCase();
+                        boolean found = false;
+                        for(Autor autor : library.getAutorsList()){
+                            if(autor.getName().equalsIgnoreCase(autorName)){
+                                String idAutor = autor.getId().trim().toLowerCase();
+                                System.out.print("Enter the new autor name: ");
+                                String newAutorName = input.nextLine();
+                                String newBornDateSDF = null;
+                                    System.out.print("Enter the new author's date of birth (dd/MM/yyyy): ");
+                                    newBornDateSDF = input.nextLine();
+                                    Date newBornDate = sdf.parse(newBornDateSDF);
+
+                                library.updateAutor(idAutor, newAutorName,newBornDate);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if(!found){
+                            throw  new AutorException("Autor with the given ID does not exist.");
+                        }
+                    }catch (AutorException  erro){
+                        System.out.println(erro.getMessage());
+                    }catch (ParseException erro){
+                        System.out.println("Invalid date format. Use dd/MM/yyyy.");
+                    }
+                    break;
+                case 8:
+                    try{
+                        System.out.print("Enter the book name: ");
+                        String bookName = input.nextLine().trim().toLowerCase();
+                        boolean found = false;
+                        String idBook = null;
+                        for(Book book : library.getBookList()){
+                            if(book.getTitleName().equalsIgnoreCase(bookName)) {
+                                idBook = book.getId().trim().toLowerCase();
+                                found = true;
+                                break;
+                            }
+                        }
+                        library.removeBookList(idBook);
+                        if(!found) {
+                            throw new BookException("Book with the given ID does not exist.");
                         }
                     }catch (BookException erro){
                         System.out.println(erro.getMessage());
