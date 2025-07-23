@@ -69,10 +69,10 @@ public class Loan {
     @Override
     public String toString(){
         return "Id: " + this.id
-                +"Book: " + this.book
-                +"Loan Date: " + this.loanDate
-                +"Loan Status: "+ availableConvert(this.loanStatus)
-                +"Loan Return: "+ this.returnDate
-                +"User: " + userName;
+                +"\nBook: " + this.book
+                +"\nLoan Date: " + this.loanDate
+                +"\nLoan Status: "+ availableConvert(this.loanStatus)
+                +"\nLoan Return: "+ this.returnDate
+                +"\nUser: " + userName;
     }
 }

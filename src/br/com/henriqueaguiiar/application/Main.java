@@ -6,6 +6,7 @@ import br.com.henriqueaguiiar.model.entities.Book;
 import br.com.henriqueaguiiar.model.entities.Library;
 import br.com.henriqueaguiiar.model.Exceptions.AutorException;
 import br.com.henriqueaguiiar.model.Exceptions.BookException;
+import br.com.henriqueaguiiar.model.entities.Loan;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -191,6 +192,39 @@ public class Main {
                             throw new BookException("Book with the given ID does not exist.");
                         }
                     }catch (BookException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
+                case 9:
+                    try{
+                        System.out.print("Enter the Autor name: ");
+                        String autorName = input.nextLine().trim().toLowerCase();
+                        boolean found = false;
+                        String idAutor = null;
+                        for(Autor autor : library.getAutorsList()){
+                            if(autor.getName().equalsIgnoreCase(autorName)){
+                                idAutor = autor.getId().trim().toLowerCase();
+                                found = true;
+                                break;
+                            }
+                        }
+                        library.removeAutorList(idAutor);
+                        if(!found){
+                            throw  new AutorException("Autor with the given ID does not exist.");
+                        }
+                    }catch (AutorException erro){
+                        System.out.println(erro.getMessage());
+                    }
+                    break;
+                case 10:
+                    try{
+                        if(library.getLoanList().isEmpty()){
+                            throw new LoanException("The loan list is empty.");
+                        }
+                        for(Loan loan : library.getLoanList()){
+                            System.out.println(loan);
+                        }
+                    }catch (LoanException erro){
                         System.out.println(erro.getMessage());
                     }
                     break;

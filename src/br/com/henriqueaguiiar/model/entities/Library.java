@@ -61,11 +61,11 @@ public class Library {
     }
 
     public void removeAutorList(String id) {
-        for (Autor autor : autorsList) {
-            if (autor.getId() == id) {
-                autorsList.remove(autor);
+        for(int i = 0; i < autorsList.size(); i++){
+            if(autorsList.get(i).getId().equalsIgnoreCase(id)){
+                autorsList.remove(i);
+                return;
             }
-
         }
         throw new AutorException("The requested author does not exist or the id is invalid");
     }
